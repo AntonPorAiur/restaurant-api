@@ -16,7 +16,7 @@ import mx.restaurante.cv.restaurantapimng.models.entities.Platillo;
 
 @RestController
 @RequestMapping("/restcv/v1")
-@CrossOrigin(origins = {"http://127.0.0.1:5500"})
+@CrossOrigin(origins = {"http://127.0.0.1:5500","http://localhost:4200"})
 public class PlatilloController {
 
   @Autowired

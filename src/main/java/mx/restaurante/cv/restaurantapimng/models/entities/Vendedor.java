@@ -33,10 +33,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Vendedor implements Serializable {
   
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+//  private Long id;
 
+  @Id
   @Column(name = "CV_NUM_EMPLEADO",unique = true)
   private Long noEmpleado;
   
@@ -59,7 +60,11 @@ public class Vendedor implements Serializable {
   @PrePersist
   public void prePersist() {
     this.fechaCreado = new Date();
-  } 
+  }
+
+  public Vendedor(Long noEmpleado) {
+    this.noEmpleado = noEmpleado;
+  }
 
   private static final long serialVersionUID = 1L;
 }

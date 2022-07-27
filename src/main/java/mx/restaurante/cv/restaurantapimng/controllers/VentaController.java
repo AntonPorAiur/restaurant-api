@@ -2,18 +2,16 @@ package mx.restaurante.cv.restaurantapimng.controllers;
 
 import java.util.*;
 
+import mx.restaurante.cv.restaurantapimng.aggregate.VentaAbs;
+import mx.restaurante.cv.restaurantapimng.models.entities.Vendedor;
 import mx.restaurante.cv.restaurantapimng.services.VendedorServiceI;
+import mx.restaurante.to.InfoVenta;
+import mx.restaurante.to.PedidoTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import mx.restaurante.cv.restaurantapimng.models.entities.Venta;
 import mx.restaurante.to.InfoPedido;
@@ -66,6 +64,32 @@ public class VentaController {
     }
     response.put("ventas",ventasEmpleado);
     return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+  }
+
+  @PutMapping("/cerrar/venta")
+  public ResponseEntity<?> cerrarCuenta(@RequestBody InfoVenta infoVenta ) {
+
+    Map<String, Object> response = new HashMap<>();
+
+    Venta actualizada = service.cerrarVenta( infoVenta );
+
+    response.put("mensaje", "Se cerró venta con éxito" );
+    response.put("venta", actualizada );
+
+    return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+  }
+
+  @PutMapping("/venta")
+  public ResponseEntity<?> actualizarPedido(@RequestBody PedidoTO pedido ) {
+
+    Map<String, Object> response = new HashMap<>();
+
+    Venta actualizada = service.agregarPlatillo( pedido );
+
+    response.put("mensaje", "Se cerró venta con éxito" );
+    response.put("venta", actualizada );
+
+    return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
   }
 
 }

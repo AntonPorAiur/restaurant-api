@@ -26,11 +26,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import mx.restaurante.cv.restaurantapimng.aggregate.VentaAbs;
 
 @Data
 @Entity
 @Table(name = "CV_VENTA")
-public class Venta implements Serializable {
+public class Venta extends VentaAbs implements Serializable {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +49,8 @@ public class Venta implements Serializable {
   @JsonIgnore
   @JsonIgnoreProperties({"venta", "hibernateLazyInitializer", "handler"})
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "CV_FK_EMPLEADO", referencedColumnName = "CV_NUM_EMPLEADO")
+  @JoinColumn(name = "CV_FK_EMPLEADO")
+//          , referencedColumnName = "CV_NUM_EMPLEADO")
   private Vendedor vendedor;
 
   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -56,8 +58,20 @@ public class Venta implements Serializable {
   @JoinColumn(name = "CV_FK_DETALLE")
   private List<DetalleVenta> detalle;
 
+  private boolean cerrada;
+
   public Venta() {
+    super();
+    this.propina = BigDecimal.ZERO;
     this.detalle = new ArrayList<>();
+  }
+
+  public Venta(long idVenta) {
+    this.id = idVenta;
+  }
+
+  public Venta(String observacion) {
+    super(observacion);
   }
 
   @PrePersist

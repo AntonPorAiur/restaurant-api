@@ -42,6 +42,10 @@ public class Platillo implements Serializable{
   public void prePersist() {
     this.fechaCreado = new Date();
   }
+
+  public Platillo(Long id) {
+    this.id = id;
+  }
   
   private static final long serialVersionUID = 1L;
 

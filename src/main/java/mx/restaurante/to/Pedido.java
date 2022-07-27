@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Pedido {
   
-  private Long id; // Id platillo
+  private long id; // Id platillo
   private String nombre; // Nombre platillo
   private String fechaCreado; // Fecha creado
   private BigDecimal precio;

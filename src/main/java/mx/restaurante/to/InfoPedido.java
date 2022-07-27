@@ -8,9 +8,10 @@ import lombok.Data;
 @Data
 public class InfoPedido {
   
-  private Long noEmpleado;
+  private long noEmpleado;
   private BigDecimal propina;
   private String observacion;
-  private List<Pedido> pedido; 
+  private List<Pedido> pedido;
+  private boolean cerrada;
 
 }
